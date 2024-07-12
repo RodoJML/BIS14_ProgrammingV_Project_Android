@@ -64,5 +64,6 @@
         android:layout_alignParentBottom="true"
         android:layout_marginStart="163dp"
         android:layout_marginBottom="421dp"
-        android:text="Conectar" />
+        android:text="Conectar"
+        android:onClick="onLogin"/>
 </RelativeLayout>
