@@ -1,10 +1,8 @@
 package com.example.habittracker
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
@@ -18,21 +16,14 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import com.example.habittracker.ui.theme.HabitTrackerTheme
 
-class MainActivity : ComponentActivity() {
+class register_user : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             HabitTrackerTheme {
-                SignInScreen(
-                    onSignIn = {
-                        // Handle sign-in action here
-                    },
-                    onForgotPassword = {
-                        // Handle forgot password action here
-                    },
+                SignUpScreen(
                     onSignUp = {
-                        val intent = Intent(this@MainActivity, register_user::class.java)
-                        startActivity(intent)
+                        // Handle sign-up action here
                     }
                 )
             }
@@ -41,12 +32,11 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun SignInScreen(
-    onSignIn: () -> Unit,
-    onForgotPassword: () -> Unit,
+fun SignUpScreen(
     onSignUp: () -> Unit
 ) {
-    val username = remember { mutableStateOf("") }
+    val fullName = remember { mutableStateOf("") }
+    val email = remember { mutableStateOf("") }
     val password = remember { mutableStateOf("") }
 
     Column(
@@ -56,9 +46,18 @@ fun SignInScreen(
         verticalArrangement = Arrangement.Center
     ) {
         OutlinedTextField(
-            value = username.value,
-            onValueChange = { username.value = it },
-            label = { Text("Username") },
+            value = fullName.value,
+            onValueChange = { fullName.value = it },
+            label = { Text("Full Name") },
+            modifier = Modifier.fillMaxWidth()
+        )
+
+        Spacer(modifier = Modifier.height(8.dp))
+
+        OutlinedTextField(
+            value = email.value,
+            onValueChange = { email.value = it },
+            label = { Text("Email") },
             modifier = Modifier.fillMaxWidth()
         )
 
@@ -73,25 +72,6 @@ fun SignInScreen(
         )
 
         Spacer(modifier = Modifier.height(16.dp))
-
-        Button(
-            onClick = onSignIn,
-            modifier = Modifier.fillMaxWidth()
-        ) {
-            Text("Login")
-        }
-
-        Spacer(modifier = Modifier.height(8.dp))
-
-        Text(
-            text = "Forgot Password?",
-            color = MaterialTheme.colorScheme.primary,
-            modifier = Modifier
-                .clickable { onForgotPassword() }
-                .padding(8.dp)
-        )
-
-        Spacer(modifier = Modifier.height(8.dp))
 
         Button(
             onClick = onSignUp,
