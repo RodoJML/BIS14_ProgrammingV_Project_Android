@@ -25,21 +25,6 @@ class MainActivity : ComponentActivity() {
             val backgroundTask = BackgroundTask(this)
             backgroundTask.execute(type, userName, password)
         }
-
-        /*enableEdgeToEdge()
-        setContent {
-            HabitTrackerTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-
-
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }
-            }
-        }*/
-
     }
 }
 
