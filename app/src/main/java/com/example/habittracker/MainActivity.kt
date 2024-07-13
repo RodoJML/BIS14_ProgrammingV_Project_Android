@@ -1,37 +1,47 @@
 package com.example.habittracker
 
 import android.os.Bundle
-import android.view.View
-import android.widget.Button
-import android.widget.EditText
 import androidx.activity.ComponentActivity
-import com.example.habittracker.database.BackgroundTask
+import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
+import com.example.habittracker.ui.theme.HabitTrackerTheme
 
 class MainActivity : ComponentActivity() {
-    private lateinit var UsernameEt: EditText
-    private lateinit var PasswordEt: EditText
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.logindb_layout)
-
-        UsernameEt = findViewById<EditText>(R.id.dbuser_field)
-        PasswordEt = findViewById<EditText>(R.id.dbpassword_field)
-
-        val loginButton: Button = findViewById(R.id.loginButton)
-        loginButton.setOnClickListener {
-            onLogin(it)
-            // The "it" in this case is the View that was clicked
+        enableEdgeToEdge()
+        setContent {
+            HabitTrackerTheme {
+                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+                    Greeting(
+                        name = "Android",
+                        modifier = Modifier.padding(innerPadding)
+                    )
+                }
+            }
         }
-    }
-
-    fun onLogin(view: View) {
-        val userName = UsernameEt.text.toString()
-        val password = PasswordEt.text.toString()
-        val type = "login"
-        val backgroundTask = BackgroundTask(this)
-        backgroundTask.execute(type, userName, password)
     }
 }
 
+@Composable
+fun Greeting(name: String, modifier: Modifier = Modifier) {
+    Text(
+        text = "Hello $name!",
+        modifier = modifier
+    )
+}
 
+@Preview(showBackground = true)
+@Composable
+fun GreetingPreview() {
+    HabitTrackerTheme {
+        Greeting("Android")
+    }
+}
