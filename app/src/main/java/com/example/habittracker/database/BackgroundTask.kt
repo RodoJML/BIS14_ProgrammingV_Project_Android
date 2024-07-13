@@ -79,6 +79,8 @@ class BackgroundTask(private val context: Context) {
                     e.printStackTrace()
                     return@withContext null
                 }
+            } else if(type == "getAll"){
+                return@withContext null
             } else {
                 return@withContext null
             }

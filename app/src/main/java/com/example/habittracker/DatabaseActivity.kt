@@ -34,8 +34,6 @@ class DatabaseActivity : ComponentActivity() {
     }
 
     fun onLogin(view: View) {
-
-
         val userName = UsernameEt.text.toString()
         val password = PasswordEt.text.toString()
         val type = "login"
