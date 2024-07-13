@@ -13,6 +13,12 @@
         android:theme="@style/Theme.HabitTracker"
         tools:targetApi="31">
         <activity
+            android:name=".temas"
+            android:exported="false" />
+        <activity
+            android:name=".ui.theme.temas"
+            android:exported="false" />
+        <activity
             android:name=".register_user"
             android:exported="false" />
         <activity
