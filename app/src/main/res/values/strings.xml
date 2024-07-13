@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Habit Tracker</string>
+    <string name="databaseconnection">Database Connection</string>
+    <string name="usuario">Usuario</string>
+    <string name="contrasena">Contrasena</string>
+    <string name="conectar">Conectar</string>
 </resources>
