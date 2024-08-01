@@ -13,12 +13,12 @@ class MainActivityMenu : AppCompatActivity() {
 
         val btnCrearHabito = findViewById<Button>(R.id.btnCrearHabito)
         btnCrearHabito.setOnClickListener {
-            navigateToHabitCreationActivity()
+            navigateToCreateHabitActivity()
         }
     }
 
-    private fun navigateToHabitCreationActivity() {
-        val intent = Intent(this, HabitCreationActivity::class.java)
+    private fun navigateToCreateHabitActivity() {
+        val intent = Intent(this, CreateHabitActivity::class.java)
         startActivity(intent)
     }
 }

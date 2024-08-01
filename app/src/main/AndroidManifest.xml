@@ -22,12 +22,12 @@
 
         <!-- Declarar HabitCreationActivity -->
         <activity
-            android:name=".HabitCreationActivity"
+            android:name=".CreateHabitActivity"
             android:exported="false" />
 
         <!-- Declarar HabitDisplayActivity -->
         <activity
-            android:name=".HabitDisplayActivity"
+            android:name=".ViewHabitActivity"
             android:exported="false" />
 
     </application>

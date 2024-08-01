@@ -6,7 +6,7 @@ import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 
-class HabitCreationActivity : AppCompatActivity() {
+class CreateHabitActivity : AppCompatActivity() {
 
     private lateinit var edTitulo: EditText
     private lateinit var edFechaInicio: EditText
@@ -14,7 +14,7 @@ class HabitCreationActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_habit_creation)
+        setContentView(R.layout.activity_create_habit)
 
         edTitulo = findViewById(R.id.edTitulo)
         edFechaInicio = findViewById(R.id.edFechaInicio)
@@ -27,7 +27,7 @@ class HabitCreationActivity : AppCompatActivity() {
             val fechaFin = edFechaFin.text.toString().trim()
 
             if (titulo.isNotEmpty() && fechaInicio.isNotEmpty() && fechaFin.isNotEmpty()) {
-                val intent = Intent(this, HabitDisplayActivity::class.java)
+                val intent = Intent(this, ViewHabitActivity::class.java)
                 intent.putExtra("EXTRA_TITULO", titulo)
                 intent.putExtra("EXTRA_FECHA_INICIO", fechaInicio)
                 intent.putExtra("EXTRA_FECHA_FIN", fechaFin)
