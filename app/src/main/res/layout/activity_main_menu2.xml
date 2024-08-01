@@ -4,15 +4,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".HabitDisplayActivity">
+    tools:context=".MainActivityMenu">
 
-    <TextView
-        android:id="@+id/tvResultado"
-        android:layout_width="wrap_content"
+    <!-- Botón para navegar a la actividad de creación de hábitos -->
+    <Button
+        android:id="@+id/btnCrearHabito"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="Resultado del Hábito"
-        android:textColor="@android:color/black"
-        android:textSize="24sp" />
+        android:text="Crear Hábito" />
 
 </LinearLayout>

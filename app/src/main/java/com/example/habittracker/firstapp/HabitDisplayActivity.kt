@@ -15,7 +15,6 @@ class HabitDisplayActivity : AppCompatActivity() {
         val fechaInicio = intent.getStringExtra("EXTRA_FECHA_INICIO") ?: ""
         val fechaFin = intent.getStringExtra("EXTRA_FECHA_FIN") ?: ""
 
-        // Mostrar los datos en el TextView
         tvResultado.text = "Título: $titulo\nFecha de inicio: $fechaInicio\nFecha de fin: $fechaFin"
     }
 }

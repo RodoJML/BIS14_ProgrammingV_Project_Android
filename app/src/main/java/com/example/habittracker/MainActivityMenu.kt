@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 
-class MainMenuActivity : AppCompatActivity() {
+class MainActivityMenu : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -13,12 +13,13 @@ class MainMenuActivity : AppCompatActivity() {
 
         val btnCrearHabito = findViewById<Button>(R.id.btnCrearHabito)
         btnCrearHabito.setOnClickListener {
-            navigateToMainActivity()
+            navigateToHabitCreationActivity()
         }
     }
 
-    private fun navigateToMainActivity() {
+    private fun navigateToHabitCreationActivity() {
         val intent = Intent(this, HabitCreationActivity::class.java)
         startActivity(intent)
     }
 }
+
