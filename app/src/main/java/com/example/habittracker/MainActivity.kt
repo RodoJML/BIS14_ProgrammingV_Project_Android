@@ -1,6 +1,7 @@
 package com.example.habittracker
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -49,6 +50,7 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
     var user by remember { mutableStateOf<User_model?>(null) }
     var errorMessage by remember { mutableStateOf<String?>(null) }
 
+    // Get all
     fun fetchUsers() {
         User_controller(context).getAll(object : User_controller.getAllCallback {
             override fun onSuccess(userModels: List<User_model>) {
@@ -61,6 +63,19 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
         })
     }
 
+   // Get by ID
+    fun fetchUserById(id: Int) {
+        User_controller(context).getById(id, object : User_controller.getByIdCallback {
+            override fun onSuccess(userModel: User_model) {
+                user = userModel
+            }
+
+            override fun onError(errorMessage: String) {
+                Log.d("Error", errorMessage)
+            }
+        })
+    }
+
 
     Column(modifier = modifier.padding(16.dp)) {
         Text(text = "Hello $name!")
@@ -69,11 +84,25 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
             Text(text = "Fetch Users")
         }
 
+        Button(onClick = { fetchUserById(1) }, modifier = Modifier.padding(top = 16.dp)) {
+            Text(text = "Fetch User ID: 1")
+        }
+
+        // Display all users
         if (errorMessage != null) {
             Text(text = "Error: $errorMessage", modifier = Modifier.padding(top = 16.dp))
         } else {
             userList.forEach { user ->
                 Text(text = user.toString(), modifier = Modifier.padding(top = 8.dp))
+            }
+        }
+
+        // Display a single user
+        if(errorMessage != null){
+            Text(text = "Error: $errorMessage", modifier = Modifier.padding(top = 16.dp))
+        } else {
+            user?.let {
+                Text(text = it.toString(), modifier = Modifier.padding(top = 8.dp))
             }
         }
     }

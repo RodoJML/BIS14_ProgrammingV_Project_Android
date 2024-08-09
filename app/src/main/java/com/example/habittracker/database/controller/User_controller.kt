@@ -65,7 +65,7 @@ class User_controller(private val context: Context) {
 
                     when(state){
                         "1" -> {
-                            val message = response.getJSONArray("user")
+                            val message = response.getJSONObject("user")
                             val userModel = Gson().fromJson(message.toString(), User_model::class.java)
                             callback.onSuccess(userModel)
                         }
