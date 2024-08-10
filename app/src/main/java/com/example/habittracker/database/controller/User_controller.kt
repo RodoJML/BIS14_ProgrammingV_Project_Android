@@ -1,12 +1,15 @@
 package com.example.habittracker.database.controller
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.util.Log
 import com.android.volley.Request
 import com.android.volley.toolbox.JsonObjectRequest
+import com.example.habittracker.database.model.User_model
 import com.example.habittracker.database.web.VolleySingleton
 import com.google.gson.Gson
-import com.example.habittracker.database.model.User_model
+import org.json.JSONObject
+
 
 class User_controller(private val context: Context) {
 
@@ -22,6 +25,12 @@ class User_controller(private val context: Context) {
         fun onError(errorMessage: String)
     }
 
+    interface insertOneCallback {
+        fun onSuccess()
+        fun onError(errorMessage: String)
+    }
+
+    // Get All
     fun getAll(callback: getAllCallback) {
         VolleySingleton.getInstance(context).addToRequestQueue(
             JsonObjectRequest(
@@ -54,6 +63,7 @@ class User_controller(private val context: Context) {
         )
     }
 
+    // Get by ID
     fun getById(id: Int, callback: getByIdCallback) {
         VolleySingleton.getInstance(context).addToRequestQueue(
             JsonObjectRequest(
@@ -85,4 +95,48 @@ class User_controller(private val context: Context) {
             )
         )
     }
+
+    // Insert One
+    fun insertOne(userModel: User_model, callback: insertOneCallback) {
+
+        val map = HashMap<String, String>()
+        map.put("id_usuario", userModel.id_usuario.toString())
+        map.put("nombre", userModel.nombre)
+        map.put("apellido", userModel.apellido)
+        map.put("correo", userModel.correo)
+        map.put("contraseña", userModel.contraseña)
+        map.put("role", userModel.role.toString())
+
+        val jobject = (map as Map<*, *>?)?.let { JSONObject(it) }
+
+        VolleySingleton.getInstance(context).addToRequestQueue(
+            JsonObjectRequest(
+                Request.Method.POST,
+                url,
+                jobject,
+                { response ->
+                    val state = response.getString("state")
+
+                    when(state){
+                        "1" -> {
+                            callback.onSuccess()
+                        }
+                        "2" -> {
+                            Log.d("JSON Response", "Database returns an error: ${response.getString("message")} ")
+                            callback.onError(response.getString("message"))
+                        }
+                        else -> {
+                            Log.d("JSON Response", "Unable to read a valid state from JSON Object or returned a bad JSON Object")
+                        }
+                    }
+
+                },
+                { error ->
+                    Log.d("REST POST Request", "Something wrong with the request: ${error.message}")
+                }
+            )
+        )
+    }
+
+
 }

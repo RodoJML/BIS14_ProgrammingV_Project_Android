@@ -1,5 +1,6 @@
 package com.example.habittracker
 
+import android.app.Notification
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
@@ -76,6 +77,19 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
         })
     }
 
+    // Insert One
+    fun insertUser(insertUser: User_model) {
+        User_controller(context).insertOne(insertUser, object : User_controller.insertOneCallback {
+            override fun onSuccess() {
+                Log.d("Success", "User inserted")
+            }
+
+            override fun onError(errorMessage: String) {
+                Log.d("Error", errorMessage)
+            }
+        })
+    }
+
 
     Column(modifier = modifier.padding(16.dp)) {
         Text(text = "Hello $name!")
@@ -105,6 +119,15 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
                 Text(text = it.toString(), modifier = Modifier.padding(top = 8.dp))
             }
         }
+
+        // Create user model
+        val user = User_model(0, "John", "Doe", "bis14test@test.com", "123456", 1)
+
+        Button(onClick = { insertUser(user) }, modifier = Modifier.padding(top = 16.dp)) {
+            Text(text = "Insert User")
+        }
+
+
     }
 
 }
