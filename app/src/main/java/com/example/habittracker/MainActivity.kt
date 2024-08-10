@@ -64,6 +64,7 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
         })
     }
 
+
    // Get by ID
     fun fetchUserById(id: Int) {
         User_controller(context).getById(id, object : User_controller.getByIdCallback {
@@ -77,11 +78,25 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
         })
     }
 
+
     // Insert One
     fun insertUser(insertUser: User_model) {
         User_controller(context).insertOne(insertUser, object : User_controller.insertOneCallback {
             override fun onSuccess() {
                 Log.d("Success", "User inserted")
+            }
+
+            override fun onError(errorMessage: String) {
+                Log.d("Error", errorMessage)
+            }
+        })
+    }
+
+    // Update One
+    fun updateUser(updateUser: User_model) {
+        User_controller(context).updateOne(updateUser, object : User_controller.updateOneCallback {
+            override fun onSuccess() {
+                Log.d("Success", "User updated")
             }
 
             override fun onError(errorMessage: String) {
@@ -122,11 +137,15 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
 
         // Create user model
         val user = User_model(0, "John", "Doe", "bis14test@test.com", "123456", 1)
-
         Button(onClick = { insertUser(user) }, modifier = Modifier.padding(top = 16.dp)) {
             Text(text = "Insert User")
         }
 
+        // Update user model
+        val userUpdate = User_model(3, "John", "What", "new@mail.com@" , "123456", 1)
+        Button(onClick = { updateUser(userUpdate) }, modifier = Modifier.padding(top = 16.dp)) {
+            Text(text = "Update User")
+        }
 
     }
 

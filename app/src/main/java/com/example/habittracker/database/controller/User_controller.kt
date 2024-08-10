@@ -30,6 +30,11 @@ class User_controller(private val context: Context) {
         fun onError(errorMessage: String)
     }
 
+    interface updateOneCallback {
+        fun onSuccess()
+        fun onError(errorMessage: String)
+    }
+
     // Get All
     fun getAll(callback: getAllCallback) {
         VolleySingleton.getInstance(context).addToRequestQueue(
@@ -137,6 +142,50 @@ class User_controller(private val context: Context) {
             )
         )
     }
+
+
+    // Update One
+    fun updateOne(userModel: User_model, callback: updateOneCallback) {
+
+        val map = HashMap<String, String>()
+        map.put("id_usuario", userModel.id_usuario.toString())
+        map.put("nombre", userModel.nombre)
+        map.put("apellido", userModel.apellido)
+        map.put("correo", userModel.correo)
+        map.put("contraseña", userModel.contraseña)
+        map.put("role", userModel.role.toString())
+
+        val jobject = (map as Map<*, *>?)?.let { JSONObject(it) }
+
+        VolleySingleton.getInstance(context).addToRequestQueue(
+            JsonObjectRequest(
+                Request.Method.POST,
+                "$url?action=update",
+                jobject,
+                { response ->
+                    val state = response.getString("state")
+
+                    when(state){
+                        "1" -> {
+                            callback.onSuccess()
+                        }
+                        "2" -> {
+                            Log.d("JSON Response", "Database returns an error: ${response.getString("message")} ")
+                            callback.onError(response.getString("message"))
+                        }
+                        else -> {
+                            Log.d("JSON Response", "Unable to read a valid state from JSON Object or returned a bad JSON Object")
+                        }
+                    }
+
+                },
+                { error ->
+                    Log.d("REST PUT Request", "Something wrong with the request: ${error.message}")
+                }
+            )
+        )
+    }
+
 
 
 }
