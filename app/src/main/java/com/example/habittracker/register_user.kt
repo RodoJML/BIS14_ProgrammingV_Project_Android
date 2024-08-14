@@ -5,38 +5,38 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Button
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import com.example.habittracker.ui.theme.HabitTrackerTheme
 
-class register_user : ComponentActivity() {
+class RegisterUserActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             HabitTrackerTheme {
-                SignUpScreen(
-                    onSignUp = {
-                        // Handle sign-up action here
-                    }
-                )
+                RegisterUserScreen()
             }
         }
     }
 }
 
 @Composable
-fun SignUpScreen(
-    onSignUp: () -> Unit
-) {
+fun RegisterUserScreen() {
+    SignUpScreen(
+        onSignUp = {
+            // Manejar la acción de registro aquí
+        }
+    )
+}
+
+@Composable
+fun SignUpScreen(onSignUp: () -> Unit) {
     val fullName = remember { mutableStateOf("") }
-    val email = remember { mutableStateOf("") }
+    val email = remember{ mutableStateOf("") }
     val password = remember { mutableStateOf("") }
 
     Column(
@@ -76,8 +76,9 @@ fun SignUpScreen(
         Button(
             onClick = onSignUp,
             modifier = Modifier.fillMaxWidth()
+
         ) {
-            Text("Sign Up")
+
         }
     }
 }
