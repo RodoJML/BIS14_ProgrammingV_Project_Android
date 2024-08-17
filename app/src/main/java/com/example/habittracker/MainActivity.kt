@@ -25,13 +25,13 @@ class MainActivity : ComponentActivity() {
             HabitTrackerTheme {
                 SignInScreen(
                     onSignIn = {
-                        // Handle sign-in action here
+                        // Manejar la acción de iniciar sesión aquí
                     },
                     onForgotPassword = {
-                        // Handle forgot password action here
+                        // Manejar la acción de olvido de contraseña aquí
                     },
                     onSignUp = {
-                        val intent = Intent(this@MainActivity, register_user::class.java)
+                        val intent = Intent(this@MainActivity, RegisterUserActivity::class.java)
                         startActivity(intent)
                     }
                 )
@@ -78,7 +78,7 @@ fun SignInScreen(
             onClick = onSignIn,
             modifier = Modifier.fillMaxWidth()
         ) {
-            Text("Login")
+
         }
 
         Spacer(modifier = Modifier.height(8.dp))
@@ -97,7 +97,7 @@ fun SignInScreen(
             onClick = onSignUp,
             modifier = Modifier.fillMaxWidth()
         ) {
-            Text("Sign Up")
+
         }
     }
 }
