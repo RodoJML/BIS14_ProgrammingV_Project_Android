@@ -47,7 +47,7 @@
                     android:layout_height="wrap_content"
                     android:hint="Usuario"
                     android:inputType="text"
-                    android:textColor="#ffffff" /> <!-- Color blanco -->
+                    android:textColor="#000000" /> <!-- Color blanco -->
 
                 <EditText
                     android:id="@+id/password"
@@ -55,7 +55,7 @@
                     android:layout_height="wrap_content"
                     android:hint="Contraseña"
                     android:inputType="textPassword"
-                    android:textColor="#ffffff" /> <!-- Color blanco -->
+                    android:textColor="#000000" /> <!-- Color blanco -->
 
                 <Button
                     android:id="@+id/login_button"
